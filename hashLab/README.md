@@ -4,7 +4,9 @@ FIRST DRAFT.
 
 Generates data for PostgreSQL database and use it as "online lab" with PostgREST.
 
-See [experiment01.csv](experiment01.csv) for results and *.php for algorithms.
+See [experiment01.csv](experiment01.csv) for results and *.php for algorithms. Header description at [metadata.json](metadata.json).
+
+To compare results (in SQL or spreadsheets) use `samples/spN` percentual as "sampling reliability",  and `keys/samples`, `collisions/keys` and `collisions/samples`  for group comparisions.
 
 ----
 

@@ -1,5 +1,7 @@
 ## Hash Lab
 
+My sandbox, for public discussions about tests and experiments in checksums and [cryptographic hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function).
+
 FIRST DRAFT.
 
 Generates data for PostgreSQL database and use it as "online lab" with PostgREST.

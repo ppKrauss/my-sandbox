@@ -41,7 +41,7 @@ foreach([3,8,80,800] as $sampleLen) // word lenght of each sample (see sampleTyp
 			// $collisionsTot = $samples - $keys;  // ... but not is $collsCount?!
 			$stackingAvg   = $collsCount? condRound($collsSum/$collsCount): 0; // Medium stacking
 			$collisionsAvg = condRound( $collsCount/$keys );
-			$occupancyRate = condRound(($collsSum+$collsCount)/$keys);  // Occupancy rate
+			$occupancyRate = condRound(($collsSum+$keys)/$keys);  // Occupancy rate
 			// see "pigeonhole occupancy" in https://en.wikipedia.org/wiki/Pigeonhole_principle
 			$occupancyRate_stddev = condRound(  stats_standard_deviation(array_values($kSpec[$algo]),true) );
 			print "\n$spN,rand-$sampleLen,$samples,$algo,$keys,$collsCount,$stackingAvg,$occupancyRate,$occupancyRate_stddev";

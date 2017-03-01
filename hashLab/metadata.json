@@ -1,0 +1,49 @@
+{
+  "@type": "Table",
+  "url":"experiment01.csv",
+  "tableSchema": {
+    "columns": [{
+      "name": "spN",
+      "titles": ["N","space of N possible hash values"],
+      "datatype": "integer"
+    }, {
+      "name": "sampleType",
+      "titles": ["Sample-type","sample type and its length"],
+      "datatype": {
+        "base": "string",
+        "format": "type-lenght"
+      }
+    }, {
+      "name": "samples",
+      "titles": ["M","Number (M) of samples of unique documents"],
+      "datatype": "integer"
+    }, {
+      "name": "algo",
+      "titles": "PHP label of the algorithm used as hash",
+      "datatype": "string"
+    }, {
+      "name": "keys",
+      "titles": "number of distinct hashes",
+      "datatype": "string"
+    }, {
+      "name": "collisions",
+      "titles": "Total number of hash-collisions",
+      "datatype": "integer"
+    }, {
+      "name": "stackingAvg",
+      "titles": "Average of number of collisions into a same hash",
+      "datatype": "string"
+    }, {
+      "name": "occupancyRate",
+      "titles": "Average number of itens per hash (colliding or not)",
+      "datatype": "float"
+    }, {
+      "name": "occupancyRate_stddev",
+      "titles": "Standard deviation of occupancyRate",
+      "datatype": "float"
+    }
+    ],
+    "primaryKey": "spN,sampleType,samples,algo",
+    "aboutUrl":"http://preshing.com/20110504/hash-collision-probabilities/"
+  }
+}

@@ -1,3 +1,7 @@
+MOVING TO https://github.com/ppKrauss/PostgREST-writeAPI
+
+
+---
 We use the best, [Nginx](https://nginx.org/) and [PostgREST](https://postgrest.com), to translate your [OpenAPI specification](https://www.openapis.org/specification) into a [back-end](https://en.wikipedia.org/wiki/Front_and_back_ends) system.
 
 The project offers automatic generation of the main piece for implementation of  your *endpoints*, the *Nginx configuration script* &mdash; that acts as a primary [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)-controller for PostgREST and for your system.

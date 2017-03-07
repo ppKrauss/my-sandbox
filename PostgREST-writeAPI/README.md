@@ -14,11 +14,14 @@ You can generate a ready-for-use production version system with PostgREST.  Is n
 
 ## OpenAPI addictions to specify your system
 
-Your application can use full stack PostgREST (the URL-SQLquery syntax) for default endpoints, and two new fields must be included in your OpenAPI spec (your `swagger.json`), to describe the endpoints with non-default PostgREST behaviour:
+Your application can use full stack PostgREST (the URL-SQLquery syntax) for default endpoints, 
+and two new fields must be included in your OpenAPI spec (your `swagger.json`), to describe the endpoints with non-default PostgREST behaviour:
 
-* ...
-* ...
+* `x-rewrite_regex`: the regular expression that in fact represents the endpoint is a concatenation of *basePath*, *localPath* and *rewrite_regex*.
+* `x-rewrite_url`: the target-URL with optional regex-variables (eg. $1).
 
+When one or both are declared at JSON's API description, it is translated to Nginx *rewrite* directive. Else default PostgREST is adopted.
+The `x-` prefix is the ["vendor extension" of OpenAPI](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#vendorExtensions).
 
 ## Methodology
 

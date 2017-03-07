@@ -9,7 +9,7 @@
  * @see https://github.com/ppKrauss
  */
 
-var mustache = require('mustache');
+var handlebars = require('handlebars');
 var fs = require('fs');
 var arg = require('minimist')(process.argv.slice(2));
 var path = process.cwd();
@@ -21,7 +21,18 @@ if (arg['tpl']==undefined || arg['api']==undefined) {
 }
 
 var apiSpec = require(path+'/api-spec/'+arg['api']+'.json');
-var template = fs.readFileSync(path + "/nginx-tpl/"+arg['tpl']+".mustache").toString();
-var out = mustache.to_html(template, apiSpec);
+var templateSrc = fs.readFileSync(path + "/nginx-tpl/"+arg['tpl']+".mustache").toString();
+
+
+// here need to use scape for each endpoint as regular expression in the script. 
+//     return value.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
+
+
+
+var template = handlebars.compile(templateSrc); // see http://stackoverflow.com/q/9058774/287948
+var out = template(apiSpec);
+
+
+//var out = mustache.to_html(template, apiSpec);
 
 console.log(out);

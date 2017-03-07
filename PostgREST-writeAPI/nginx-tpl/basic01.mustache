@@ -1,0 +1,65 @@
+#
+# Endpoints for the API "{{info.title}}".
+#
+# schemes: {{#schemes}}{{{.}}},{{/schemes}}
+#
+
+server {
+
+       # publishing by default the HTML for API description and related files for navigation
+	server_name {{host}};
+	root /var/www/api/html;
+	index index.html index.htm;
+
+	location / {
+		try_files $uri $uri/ @proxy;
+	}
+
+	location @proxy {
+
+
+		# # # # # # # # # #
+		#### spetial endpoints
+
+		{{#each paths}}
+                rewrite {{#each this}}
+                        # {{@key}}: {{this.summary}}
+		{{/each}}
+{{@key}}
+
+                  ^/urn:issn:(\d\d\d\d)\-?(\d\d\d)/is[nN]$
+                  /vwint_issn_isn?select=isn&issn=eq.$1$2
+                  break;
+		{{/each}}
+
+
+		rewrite # isN (ISSN) checker
+		  ^/urn:issn:(\d\d\d\d)\-?(\d\d\d)/is[nN]$
+		  /vwint_issn_isn?select=isn&issn=eq.$1$2
+		  break;
+
+		# # # # # # # # # #
+		#### endpoint of a second application (other system)
+		rewrite # URN LEX-Diário Oficial
+		  ^/urn:lex-do:br\;(?:rj|rio.janeiro)\;rio\.janeiro:(?:executivo|exe|legislativo|leg|judiciario|jud):materia:([0-9]+)$ 
+		  /vw_content?select=urn_do,materia_id,content&materia_id=eq.$1  
+		  break;
+
+
+		# # # # # # # # # #
+		#### default and auxiliar endpoint, for PostgREST-queries
+		rewrite  
+		  ^{{{basePath}}}/(.*)$ 
+		  /$1 
+		  break;
+
+		proxy_pass  http://127.0.0.1:3000;  # my PostREST is  here!
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		default_type  {{{produces}}};
+		proxy_hide_header Content-Location;
+		proxy_set_header  Connection "";
+		proxy_http_version 1.1;
+	}
+}

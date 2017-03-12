@@ -48,6 +48,7 @@ Similar projects or product modules with similar function:
 * [Amazon's AWS API-Gateway](https://aws.amazon.com/pt/api-gateway/)
 * [tyk.io](https://tyk.io) (see gateway building)
 * [memcached.org](http://www.memcached.org/)
+* [gRPC Gateway](https://github.com/grpc-ecosystem/grpc-gateway)
 * https://github.com/ppKrauss/PostgREST-writeAPI
 * https://github.com/antirez/redis
 * https://github.com/twitter/twemproxy

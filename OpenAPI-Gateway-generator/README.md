@@ -24,7 +24,7 @@ The [swagger.io/tools](http://swagger.io/tools/) implements  its code generation
 
 The API Gateway acts as a dedicated orchestration layer for all your backend APIs, to separate orchestration from implementation concerns. The gateway is a Nginx script generated from the OpenAPI specifications of each microservice (adding some `x-` properties when need), and the `openapi-gateway.json` file.
 
-Leverages the governance capabilities of the API Manager, so that you can apply throttling, security, and other policies to your APIs.
+You can also accomplish  throttling, security, and other policies to your APIs: the project  leverages the governance opportunities of the API Gateway, to implement capabilities. 
 
 ## Usage
 

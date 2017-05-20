@@ -1,3 +1,5 @@
+Use new standard as reference!  https://www.icann.org/resources/pages/rdap-operational-profile-2016-07-26-en
+
 # whois-to-semantic
 
 There are a lot of "good" WHOIS interpreters, like [python-whois](https://github.com/joepie91/python-whois) or [phpWhois](https://github.com/phpWhois/phpWhois), but each has its own interpretation of the fields and use different JSON fields and JSON structures... 

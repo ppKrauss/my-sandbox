@@ -39,4 +39,80 @@ CREATE TABLE oficial.lexnames(
   UNIQUE(fk_ns,lexname)
 );
 
+---------
+---------
+
+CREATE TABLE oficial.jurisdiction(
+  --
+  -- UrnLex-like concept of JURISDICTION. 
+  --
+  id serial PRIMARY KEY,
+  lexname  text NOT NULL, -- main term
+  name text,  -- optional, UTF8 with spaces, accents, case sensitive, etc.
+  abbrev text,  -- optional for most popular "short" name.
+  info JSONB,     -- any other metadata.
+  UNIQUE(lexname)
+);
+
+CREATE TABLE oficial.authority(
+  --
+  -- UrnLex-like concept of AUTHORITY, for each article (not the issue).
+  --
+-- falta avaliar como cadastrar autoridade-contratante, ver http://schema.org/GeneralContractor
+  id serial PRIMARY KEY,
+  lexname  text NOT NULL, -- main term
+  kx_parent int REFERENCES oficial.authority(id), -- when not null, check same lexname prefix.
+  name text,  -- optional, UTF8 with spaces, accents, case sensitive, etc.
+  abbrev text,  -- optional for most popular "short" name.
+  info JSONB,     -- any other metadata.
+  UNIQUE(lexname)
+);
+
+CREATE TABLE oficial.organization(
+  --
+  -- http://schema.org/Organization
+  --
+  id serial PRIMARY KEY,
+  type text NOT NULL DEFAULT 'editora', -- 'editora', 'contratante' and others, see data model.
+  vatID text, -- CNPJ or equivalent
+  lexname  text NOT NULL, -- organization's official full-name
+  name text,  -- optional, UTF8 with spaces, accents, case sensitive, etc.
+  abbrev text,  -- optional for most popular "short" name.
+  info JSONB,     -- any other metadata.
+  UNIQUE(lexname)
+);
+
+CREATE TABLE oficial.PublicationIssue(
+  --
+  -- Fascículo,  http://schema.org/PublicationIssue
+  --
+  id serial PRIMARY KEY,
+  issueNumber text NOT NULL, -- public ID in the serial, see http://schema.org/issueNumber
+  datePublished date NOT NULL, -- see http://schema.org/datePublished
+  seq smallint,   -- optional "sequencial in the datePublished"
+  kx_oficial_url text NOT NULL,    -- any valid URL to the publication
+  info JSONB,     -- any other metadata.
+  UNIQUE(issueNumber)
+);
+
+[Contrato|contrato_url;contrato_valor;contrato_fracao]
+
+[Jurisdição]1---*[Autoridade]
+[Jurisdição]<>---1..*[SubJurisdição]
+[Jurisdição]^-[SubJurisdição]
+
+[Autoridade]^-[Contratante]
+
+[Periodico|-issn;name;abbrev;isDiario;info:JSON]
+[DiarioOficial|-id;name;abbrev;info:JSON]
+
+[Jurisdição]1---*[DiarioOficial]
+[Contratante]1---1..*[Contrato]
+[Editora]---1..*[Contrato]
+[Periodico]++-1>[DiarioOficial]
+[Periodico]^-[Específico]
+[DiarioOficial]++-1..*>[Fascículo]
+[Contrato]<>---1..*[Fascículo]
+[Editora]<>---1..*[Periodico]
+
 

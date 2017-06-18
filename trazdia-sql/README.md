@@ -35,7 +35,7 @@ Ver arquivos preparados em *steps*:
 
 * [step1_lib](step1_lib.sql): atualiza a *library* de funções básicas (*snippets*) de apoio a triggers, etc.
 
-* [step2_schema](step1_schema.sql): cria o esquema e suas tabelas. Cuidado: faz drop cascade do esquema inteiro.
+* [step2_schema](step2_schema.sql): cria o esquema e suas tabelas. Cuidado: faz drop cascade do esquema inteiro.
 
 * ...
 

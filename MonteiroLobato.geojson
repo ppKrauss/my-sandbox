@@ -1,6 +1,5 @@
 {
     "id": "R298450",
-    "crs": {"type": "name", "properties": {"name": "WGS84"}},
     "type": "GeometryCollection",
     "geometries": [
         {

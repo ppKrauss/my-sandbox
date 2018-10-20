@@ -1,4 +1,6 @@
 {
+    "id": "R298450",
+    "crs": {"type": "name", "properties": {"name": "EPSG:4326"}},
     "type": "GeometryCollection",
     "geometries": [
         {
